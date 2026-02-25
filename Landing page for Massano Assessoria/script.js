@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = '5511999999999';
+const WHATSAPP_NUMBER = '71 99111-7575';
 
 function scrollToSection(href) {
   if (href === '#home') {
