@@ -60,7 +60,7 @@
           <div class="hero-overlay"></div>
           <div class="relative z-10 px-8 md:px-12 py-16 md:py-24 max-w-2xl text-white space-y-6">
             <h1 class="text-4xl md:text-6xl font-bold leading-tight">Cuidando de Pequenas Empresas.</h1>
-            <p class="text-xl md:text-[2rem] leading-snug text-gray-100 max-w-xl">Dedicados a atender seu negócio em todas as necessidades contábeis e de assessoria.</p>
+            <p class="text-xl md:text-[2rem] leading-snug text-gray-100 max-w-xl">Dedicados a atender seu negócio em todas as necessidades empresariais e de assessoria.</p>
             <button data-scroll="#servicos" class="btn hero-cta text-white px-10 py-7 text-2xl font-bold tracking-wide">SAIBA MAIS</button>
           </div>
 
@@ -98,9 +98,10 @@
                 <p class="text-2xl text-gray-600 leading-snug flex items-center gap-2">
                   <span class="xp-badge relative inline-flex items-center justify-center mr-2">
                     <span class="xp-badge-bg"></span>
-                    <span class="xp-badge-number">+10</span>
+                    <span class="xp-badge-number" id="xp-badge-animate">+0</span>
                   </span>
-                  Anos de Experiência em documentação empresarial essencial para pequenas empresas.
+                    Anos de Experiência em 
+                    documentação empresarial essencial para pequenas empresas.
                 </p>
                 <button data-scroll="#servicos" class="text-[#b89355] text-xl tracking-wide font-bold inline-flex items-center gap-2">LEIA MAIS <span>➜</span></button>
               </div>
@@ -379,5 +380,28 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="script.js"></script>
   </body>
+    <script>
+      // Animação de contagem para o +10
+      document.addEventListener('DOMContentLoaded', function() {
+        var el = document.getElementById('xp-badge-animate');
+        if (!el) return;
+        var start = 0;
+        var end = 10;
+        var duration = 1200; // ms
+        var startTime = null;
+        function animateCount(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          var value = Math.floor(progress * (end - start) + start);
+          el.textContent = '+' + value;
+          if (progress < 1) {
+            requestAnimationFrame(animateCount);
+          } else {
+            el.textContent = '+10';
+          }
+        }
+        requestAnimationFrame(animateCount);
+      });
+    </script>
 </html>
   
