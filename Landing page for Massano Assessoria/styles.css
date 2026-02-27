@@ -38,6 +38,57 @@ body {
 }
 
 /* ===== HEADER ===== */
+/* Destaque animado para número e texto de experiência */
+/* Card animado para destaque de experiência */
+.xp-card-anim {
+    background: #fff;
+    border: 2px solid #b89355;
+    border-radius: 22px;
+    box-shadow: 0 8px 32px rgba(185, 147, 85, 0.18), 0 2px 8px rgba(10,36,114,0.08);
+    padding: 1.2rem 2rem;
+    transition: box-shadow 0.4s, border-color 0.4s, transform 0.4s;
+    will-change: box-shadow, border-color, transform;
+    margin-bottom: 1.2rem;
+}
+.xp-card-anim:hover {
+    box-shadow: 0 16px 48px rgba(185, 147, 85, 0.28), 0 4px 16px rgba(10,36,114,0.12);
+    border-color: #dbb15d;
+    transform: translateY(-4px) scale(1.03);
+}
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    20% { transform: translateY(-20px); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+    80% { transform: translateY(-2px); }
+}
+.animate-bounce {
+    animation: bounce 1.2s infinite;
+}
+@keyframes fadein {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slidein {
+    0% { opacity: 0; transform: translateX(-30px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.15); filter: brightness(1.2); }
+}
+
+.animate-fadein {
+    animation: fadein 1s ease;
+}
+.animate-slidein {
+    animation: slidein 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+.animate-pulse {
+    animation: pulse 1.5s infinite;
+}
 .header-shell {
     flex-direction: row !important;
     align-items: center !important;
@@ -45,7 +96,7 @@ body {
     gap: 0.5rem !important;
     padding: 0.5rem 2rem !important;
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    backgound-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(10, 36, 114, 0.08);
     position: sticky;
     top: 0;

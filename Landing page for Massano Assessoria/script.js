@@ -1,3 +1,20 @@
+// Animação de contagem para o número de anos de experiência
+document.addEventListener('DOMContentLoaded', function() {
+    const xpCount = document.getElementById('xp-count');
+    if (xpCount) {
+        let start = 0;
+        const end = 10;
+        const duration = 1200;
+        const stepTime = Math.max(Math.floor(duration / end), 50);
+        const timer = setInterval(() => {
+            start++;
+            xpCount.textContent = '+' + start;
+            if (start >= end) {
+                clearInterval(timer);
+            }
+        }, stepTime);
+    }
+});
 // Número do WhatsApp
 const WHATSAPP_NUMBER = '71 99111-7575';
 
