@@ -1,27 +1,13 @@
-// Animação de contagem para o número de anos de experiência
-document.addEventListener('DOMContentLoaded', function() {
-    const xpCount = document.getElementById('xp-count');
-    if (xpCount) {
-        let start = 0;
-        const end = 10;
-        const duration = 1200;
-        const stepTime = Math.max(Math.floor(duration / end), 50);
-        const timer = setInterval(() => {
-            start++;
-            xpCount.textContent = '+' + start;
-            if (start >= end) {
-                clearInterval(timer);
-            }
-        }, stepTime);
-    }
-});
+// ===== WHATSAPP =====
+const WHATSAPP_NUMBER = '5571991117575'; // Número sem espaços ou caracteres especiais
 
-// Número do WhatsApp
-const WHATSAPP_NUMBER = '71 99111-7575';
+// Função principal do WhatsApp
+function openWhatsApp(message = 'Olá! Gostaria de saber mais sobre os serviços de regularização empresarial.') {
+    const text = encodeURIComponent(message);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
+}
 
-/**
- * Rola suavemente até a seção
- */
+// ===== SCROLL SUAVE =====
 function scrollToSection(href) {
     if (href === '#home') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -37,183 +23,85 @@ function scrollToSection(href) {
     }
 }
 
-/**
- * Abre WhatsApp com animação
- */
-function openWhatsApp() {
-    const message = encodeURIComponent('Olá! Gostaria de saber mais sobre os serviços de regularização empresarial.');
+// ===== POPUP DE PREÇO =====
+function openPricePopup() {
+    const popup = document.getElementById('pricePopup');
+    if (popup) popup.classList.add('active');
+}
+
+function closePricePopup() {
+    const popup = document.getElementById('pricePopup');
+    if (popup) popup.classList.remove('active');
+}
+
+// ===== MODAL SERVIÇOS =====
+function openModal(tipo) {
+    const modal = document.getElementById('modal-servico');
+    const title = document.getElementById('modal-title');
+    const desc = document.getElementById('modal-desc');
     
-    const buttons = document.querySelectorAll('[data-action="whatsapp"]');
-    buttons.forEach(btn => {
-        btn.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            btn.style.transform = '';
-        }, 200);
-    });
-    
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
-}
-
-/**
- * Abre cliente de e-mail
- */
-function openMailTo(subjectText, bodyText) {
-    const subject = encodeURIComponent(subjectText);
-    const body = encodeURIComponent(bodyText);
-    window.location.href = `mailto:contato@massanoassessoria.com.br?subject=${subject}&body=${body}`;
-}
-
-/**
- * Rótulos dos campos
- */
-function labelFromKey(key) {
-    const labels = {
-        name: 'Nome',
-        email: 'Email',
-        message: 'Mensagem',
-        phone: 'Telefone',
-        businessType: 'Tipo de Negócio',
-    };
-    return labels[key] || key;
-}
-
-/**
- * Constrói corpo do e-mail
- */
-function buildMailBody(formData) {
-    const lines = [];
-    for (const [key, value] of formData.entries()) {
-        if (!String(value).trim()) continue;
-        lines.push(`${labelFromKey(key)}: ${value}`);
+    if (tipo === 'dir') {
+        title.textContent = 'Declaração de Inexistência de Risco (DIR)';
+        desc.innerHTML = `A Declaração de Inexistência de Risco (DIR) é um documento técnico elaborado pela Massano Assessoria, para empresas que não possuem exposição a agentes físicos, químicos ou biológicos que gerem riscos ocupacionais aos trabalhadores.<br><br>
+Ela comprova que a empresa:<br>
+<ul style='text-align:left;margin:0 0 1rem 1.2rem;'>
+<li>Não possui riscos ambientais significativos</li>
+<li>Está em conformidade com as exigências legais</li>
+<li>Atende às normas de Saúde e Segurança do Trabalho</li>
+<li>Pode ser dispensada de programas mais complexos, quando aplicável</li>
+</ul>
+<b>Para que serve a DIR?</b><br>
+<ul style='text-align:left;margin:0 0 1rem 1.2rem;'>
+<li>Regularização junto aos órgãos competentes</li>
+<li>Atendimento às exigências do eSocial</li>
+<li>Segurança jurídica para a empresa</li>
+<li>Comprovação técnica da inexistência de riscos ocupacionais</li>
+</ul>
+<b>Como a MASSANO ASSESSORIA realiza a DIR?</b><br>
+<ul style='text-align:left;margin:0 0 1rem 1.2rem;'>
+<li>Análise das atividades da empresa</li>
+<li>Avaliação técnica das condições de trabalho</li>
+<li>Emissão de documento formal assinado por profissional habilitado</li>
+<li>Atendimento 100% digital</li>
+</ul>`;
+    } else if (tipo === 'pgr') {
+        title.textContent = 'PGR - Programa de Gerenciamento de Riscos';
+        desc.innerHTML = `O PGR – Programa de Gerenciamento de Riscos é um documento obrigatório de Segurança e Saúde no Trabalho, exigido pela Ministério do Trabalho e Emprego, conforme a NR 01. Ele tem como objetivo identificar, avaliar e controlar os riscos ocupacionais existentes nas atividades da empresa, prevenindo acidentes e doenças do trabalho.<br><br>
+<b>Qual é o objetivo do PGR?</b><br>
+<ul style='text-align:left;margin:0 0 1rem 1.2rem;'>
+<li>Reduzir acidentes e afastamentos</li>
+<li>Prevenir doenças ocupacionais</li>
+<li>Atender à legislação trabalhista</li>
+<li>Evitar multas e autuações</li>
+<li>Proteger a integridade física dos trabalhadores</li>
+</ul>
+<b>O que compõe o PGR?</b><br>
+O PGR é formado basicamente por dois principais documentos:<br><br>
+<b>Inventário de Riscos</b><br>
+É o levantamento detalhado de todos os riscos presentes na empresa, como:<br>
+<ul style='text-align:left;margin:0 0 1rem 1.2rem;'>
+<li>Riscos físicos (ruído, calor, vibração)</li>
+<li>Riscos químicos (poeiras, vapores, gases)</li>
+<li>Riscos biológicos</li>
+<li>Riscos ergonômicos</li>
+<li>Riscos de acidentes</li>
+</ul>
+Aqui são identificados:<br>
+<ul style='text-align:left;margin:0 0 1rem 1.2rem;'>
+<li>Onde o risco está</li>
+<li>Quem está exposto</li>
+<li>Qual o nível de risco</li>
+<li>Quais medidas de controle são necessárias</li>
+</ul>`;
     }
-    return lines.join('\n');
+    modal.style.display = 'flex';
 }
 
-/**
- * Configura botões de scroll
- */
-function setupScrollButtons() {
-    const menuButtons = document.querySelectorAll('[data-scroll]');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = document.getElementById('menu-icon');
-    const closeIcon = document.getElementById('close-icon');
-
-    menuButtons.forEach((button) => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const href = button.getAttribute('data-scroll');
-            if (!href) return;
-
-            scrollToSection(href);
-
-            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-                menuIcon?.classList.remove('hidden');
-                closeIcon?.classList.add('hidden');
-            }
-
-            button.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                button.style.transform = '';
-            }, 200);
-        });
-    });
+function closeModal() {
+    document.getElementById('modal-servico').style.display = 'none';
 }
 
-/**
- * Configura menu mobile
- */
-function setupMobileMenu() {
-    const menuButton = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = document.getElementById('menu-icon');
-    const closeIcon = document.getElementById('close-icon');
-
-    if (!menuButton || !mobileMenu) return;
-
-    menuButton.addEventListener('click', () => {
-        const isOpen = !mobileMenu.classList.contains('hidden');
-        
-        menuButton.style.transform = 'scale(0.9)';
-        setTimeout(() => {
-            menuButton.style.transform = '';
-        }, 200);
-
-        mobileMenu.classList.toggle('hidden');
-
-        if (isOpen) {
-            menuIcon?.classList.remove('hidden');
-            closeIcon?.classList.add('hidden');
-            mobileMenu.style.animation = 'slideOutUp 0.3s ease';
-        } else {
-            menuIcon?.classList.add('hidden');
-            closeIcon?.classList.remove('hidden');
-            mobileMenu.style.animation = 'slideInDown 0.3s ease';
-        }
-    });
-}
-
-/**
- * Configura botões do WhatsApp
- */
-function setupWhatsAppButtons() {
-    const whatsappButtons = document.querySelectorAll('[data-action="whatsapp"]');
-    whatsappButtons.forEach((button) => {
-        button.addEventListener('click', openWhatsApp);
-    });
-}
-
-/**
- * Configura formulários de e-mail
- */
-function setupMailForms() {
-    const forms = document.querySelectorAll('form[data-mail-form], #contact-form');
-
-    forms.forEach((form) => {
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.classList.add('loading');
-            submitBtn.disabled = true;
-
-            const formData = new FormData(form);
-            const subject = form.getAttribute('data-mail-subject') || 'Solicitação de Orçamento - Massano Assessoria';
-            const body = buildMailBody(formData);
-
-            setTimeout(() => {
-                openMailTo(subject, body);
-                
-                submitBtn.classList.remove('loading');
-                submitBtn.disabled = false;
-                
-                submitBtn.textContent = '✓ Enviado!';
-                submitBtn.style.background = '#10b981';
-                
-                setTimeout(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.style.background = '';
-                }, 2000);
-            }, 500);
-        });
-    });
-}
-
-/**
- * Atualiza ano no footer
- */
-function setupCurrentYear() {
-    const yearElement = document.getElementById('current-year');
-    if (yearElement) {
-        yearElement.textContent = String(new Date().getFullYear());
-    }
-}
-
-/**
- * Cria as fatias do círculo para o badge
- */
+// ===== ANIMAÇÃO DO BADGE =====
 function criarFatias() {
     const badge = document.querySelector('.xp-badge');
     if (!badge) return;
@@ -247,13 +135,9 @@ function criarFatias() {
         path.setAttribute("data-fatia", i);
         svg.appendChild(path);
     }
-
     badge.insertBefore(svg, badge.firstChild);
 }
 
-/**
- * Anima as fatias do círculo
- */
 function animarFatias(progresso) {
     const paths = document.querySelectorAll('.xp-badge-svg path');
     if (!paths.length) return;
@@ -288,9 +172,6 @@ function animarFatias(progresso) {
     });
 }
 
-/**
- * Animação do badge de experiência
- */
 function setupBadgeAnimation() {
     const el = document.getElementById('xp-badge-animate');
     if (!el) return;
@@ -303,12 +184,9 @@ function setupBadgeAnimation() {
     function animateCount(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        
         const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-        
         const value = Math.floor(eased * (end - start) + start);
         el.textContent = '+' + value;
-        
         animarFatias(eased);
 
         if (progress < 1) {
@@ -316,26 +194,89 @@ function setupBadgeAnimation() {
         } else {
             el.textContent = '+10';
             animarFatias(1);
-            
-            const badge = document.querySelector('.xp-badge');
-            badge.style.animation = 'pulse 0.5s';
-            setTimeout(() => {
-                badge.style.animation = '';
-            }, 500);
         }
     }
-
-    setTimeout(() => {
-        requestAnimationFrame(animateCount);
-    }, 500);
+    setTimeout(() => requestAnimationFrame(animateCount), 500);
 }
 
-/**
- * Adiciona animações de entrada nas seções
- */
+// ===== SETUP DOS BOTÕES =====
+function setupScrollButtons() {
+    document.querySelectorAll('[data-scroll]').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = button.getAttribute('data-scroll');
+            if (href) scrollToSection(href);
+        });
+    });
+}
+
+function setupMobileMenu() {
+    const menuButton = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    if (!menuButton || !mobileMenu) return;
+
+    menuButton.addEventListener('click', () => {
+        const isOpen = !mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        
+        if (isOpen) {
+            menuIcon?.classList.remove('hidden');
+            closeIcon?.classList.add('hidden');
+        } else {
+            menuIcon?.classList.add('hidden');
+            closeIcon?.classList.remove('hidden');
+        }
+    });
+}
+
+function setupWhatsAppButtons() {
+    document.querySelectorAll('[data-action="whatsapp"]').forEach(button => {
+        button.addEventListener('click', () => openWhatsApp());
+    });
+}
+
+function setupMailForms() {
+    function buildMailBody(formData) {
+        const lines = [];
+        for (const [key, value] of formData.entries()) {
+            if (!String(value).trim()) continue;
+            lines.push(`${key}: ${value}`);
+        }
+        return lines.join('\n');
+    }
+
+    document.querySelectorAll('form[data-mail-form], #contact-form').forEach(form => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+
+            const formData = new FormData(form);
+            const subject = form.getAttribute('data-mail-subject') || 'Solicitação de Contato';
+            const body = buildMailBody(formData);
+            
+            window.location.href = `mailto:massanoassesoria@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }, 2000);
+        });
+    });
+}
+
+function setupCurrentYear() {
+    const yearElement = document.getElementById('current-year');
+    if (yearElement) yearElement.textContent = String(new Date().getFullYear());
+}
+
 function setupScrollReveal() {
-    const sections = document.querySelectorAll('section');
-    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -345,7 +286,7 @@ function setupScrollReveal() {
         });
     }, { threshold: 0.1 });
 
-    sections.forEach(section => {
+    document.querySelectorAll('section').forEach(section => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(30px)';
         section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -353,51 +294,12 @@ function setupScrollReveal() {
     });
 }
 
-/**
- * ===== POPUP DE PREÇO =====
- */
-function openPricePopup() {
-    const popup = document.getElementById('pricePopup');
-    popup.classList.add('active');
-}
+// ===== INICIALIZAÇÃO =====
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializa ícones
+    if (window.lucide?.createIcons) window.lucide.createIcons();
 
-function closePricePopup() {
-    const popup = document.getElementById('pricePopup');
-    popup.classList.remove('active');
-}
-
-/**
- * Inicialização
- */
-window.addEventListener('DOMContentLoaded', () => {
-    function setupHeroCarousel() {
-        const imgs = document.querySelectorAll('.hero-carousel .carousel-img');
-        let idx = 0;
-        const total = imgs.length;
-        const interval = 4000;
-
-        function showImage(i) {
-            imgs.forEach((img, j) => {
-                img.style.opacity = (j === i) ? '1' : '0';
-                img.style.zIndex = (j === i) ? '1' : '0';
-            });
-        }
-        
-        if (total > 0) {
-            showImage(idx);
-            setInterval(() => {
-                idx = (idx + 1) % total;
-                showImage(idx);
-            }, interval);
-        }
-    }
-    
-    setupHeroCarousel();
-    
-    if (window.lucide?.createIcons) {
-        window.lucide.createIcons();
-    }
-
+    // Configura tudo
     criarFatias();
     setupBadgeAnimation();
     setupScrollButtons();
@@ -407,87 +309,55 @@ window.addEventListener('DOMContentLoaded', () => {
     setupCurrentYear();
     setupScrollReveal();
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const href = this.getAttribute('href');
-            if (href && href !== '#') {
-                scrollToSection(href);
-            }
-        });
-    });
-
-    // Configurar fechar popup ao clicar fora
+    // Fechar popup ao clicar fora
     const popup = document.getElementById('pricePopup');
     if (popup) {
-        popup.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePricePopup();
-            }
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) closePricePopup();
         });
     }
 
-    // Fechar popup com tecla ESC
-    document.addEventListener('keydown', function(e) {
+    // Fechar modal ao clicar fora
+    const modal = document.getElementById('modal-servico');
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
+
+    // Tecla ESC
+    document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closePricePopup();
+            closeModal();
         }
     });
 
-    // Abrir popup automaticamente após 5 segundos (opcional)
-    setTimeout(function() {
+    // Abrir popup automaticamente após 3 segundos
+    setTimeout(() => {
         if (!sessionStorage.getItem('popupShown')) {
             openPricePopup();
             sessionStorage.setItem('popupShown', 'true');
         }
-    }, 5000);
+    }, 3000);
 });
 
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
+// ===== FUNÇÕES GLOBAIS PARA O HTML =====
+window.openPricePopup = openPricePopup;
+window.closePricePopup = closePricePopup;
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.openWhatsApp = openWhatsApp;
+
+// ===== FUNÇÃO ESPECÍFICA PARA O BOTÃO FALAR COM ESPECIALISTA =====
+function openWhatsappExpert() {
+    const message = encodeURIComponent('Olá! Vi o plano de R$ 300/mês e gostaria de falar com um especialista.');
+    window.open(`https://wa.me/5571991117575?text=${message}`, '_blank');
     
-    const heroContent = document.querySelector('.hero-panel .relative');
-    if (heroContent) {
-        heroContent.classList.add('content-loaded');
-    }
-});
-
-// ===== FECHAR MODAL AO CLICAR FORA =====
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('modal-servico');
-    
-    if (modal) {
-        modal.addEventListener('click', function(event) {
-            // Verifica se clicou no fundo escuro (overlay) e não no conteúdo do modal
-            if (event.target === modal) {
-                closeModal();
-            }
-        });
-    }
-});
-
-// ===== POPUP INLINE ENTRE O TEXTO =====
-function togglePricePopup() {
-    const popup = document.getElementById('pricePopupInline');
-    popup.classList.toggle('show');
+    // Feedback visual no botão
+    const btn = event.currentTarget;
+    btn.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        btn.style.transform = '';
+    }, 200);
 }
-
-// Fechar popup ao clicar fora
-document.addEventListener('click', function(event) {
-    const popup = document.getElementById('pricePopupInline');
-    const trigger = document.querySelector('.price-popup-trigger');
-    
-    if (popup && trigger) {
-        if (!trigger.contains(event.target) && !popup.contains(event.target)) {
-            popup.classList.remove('show');
-        }
-    }
-});
-
-// Fechar com ESC
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        const popup = document.getElementById('pricePopupInline');
-        if (popup) popup.classList.remove('show');
-    }
-});
