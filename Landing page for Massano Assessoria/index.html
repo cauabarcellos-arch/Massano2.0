@@ -12,15 +12,12 @@
   <body class="min-h-screen bg-[#efefef] text-gray-900">
     <div class="site-shell max-w-[1180px] mx-auto px-4 pb-16">
 
-      <header class="bg-transparent pt-2">
+      <header class="bg-transparent pt-2" style="position:absolute;top:0;left:0;width:100%;z-index:30;pointer-events:auto;">
         <div class="header-shell flex flex-col lg:flex-row items-center justify-between py-2 px-0 relative w-full gap-2">
           <div class="flex items-center gap-2 lg:gap-3">
             <a href="#home" class="flex items-center gap-2 lg:gap-3">
-              <img src="imagens/sem_fudno.png" alt="Logo Massano Assessoria" class="h-16 w-auto" />
-              <div class="leading-tight">
-                <p class="text-lg font-semibold text-[#0b2452] mb-0">MASSANO</p>
-                <p class="text-[10px] uppercase tracking-[0.16em] text-gray-500 mb-0">Assessoria</p>
-              </div>
+              <img src="imagens/sem_fudno.png" alt="Logo Massano Assessoria" class="h-24 w-auto md:h-28 lg:h-32 xl:h-36" />
+
             </a>
           </div>
           <div class="flex items-center gap-2 lg:gap-4 w-full justify-center lg:justify-end">
@@ -52,7 +49,7 @@
       <main>
         <section id="home" class="hero-panel relative bg-cover bg-center overflow-visible">
           <div class="hero-overlay"></div>
-          <div class="relative z-10 px-8 md:px-12 py-16 md:py-24 max-w-2xl text-white space-y-6">
+          <div class="relative z-10 px-8 md:px-12 py-24 md:py-36 max-w-2xl text-white space-y-6">
             <h1 class="text-4xl md:text-6xl font-bold leading-tight">Cuidando de Pequenas Empresas.</h1>
             <p class="text-xl md:text-[2rem] leading-snug text-gray-100 max-w-xl">Dedicados a atender seu negócio em todas as necessidades empresariais e de assessoria.</p>
             <button data-scroll="#servicos" class="btn hero-cta text-white px-10 py-7 text-2xl font-bold tracking-wide">SAIBA MAIS</button>
@@ -174,8 +171,8 @@
             <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-[#0b2452]">Nossos Serviços</h2>
             <p class="text-lg text-gray-600">Serviços especializados em contabilidade e assessoria para pequenas empresas.</p>
           </div>
-          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            <article class="card hover:shadow-xl transition-all duration-300 border-0 shadow-md">
+          <div class="flex flex-col md:flex-row justify-center items-center gap-8 w-full max-w-3xl mx-auto">
+            <article class="card hover:shadow-xl transition-all duration-300 border-0 shadow-md w-full max-w-xs flex-1">
               <div class="card-header">
                 <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                   <i data-lucide="file-text" class="h-8 w-8 text-blue-900"></i>
@@ -188,8 +185,7 @@
                 <button data-scroll="#contato" class="btn w-full border border-[#0b2452] text-[#0b2452] hover:bg-[#0b2452] hover:text-white bg-white">Saiba Mais</button>
               </div>
             </article>
-
-            <article class="card hover:shadow-xl transition-all duration-300 border-0 shadow-md">
+            <article class="card hover:shadow-xl transition-all duration-300 border-0 shadow-md w-full max-w-xs flex-1">
               <div class="card-header">
                 <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                   <i data-lucide="shield" class="h-8 w-8 text-blue-900"></i>
@@ -199,34 +195,6 @@
               </div>
               <div class="card-content space-y-2">
                 <p class="text-gray-600">Plano prático para reduzir perigos e prevenir acidentes nas empresas.</p>
-                <button data-scroll="#contato" class="btn w-full border border-[#0b2452] text-[#0b2452] hover:bg-[#0b2452] hover:text-white bg-white">Saiba Mais</button>
-              </div>
-            </article>
-
-            <article class="card hover:shadow-xl transition-all duration-300 border-0 shadow-md">
-              <div class="card-header">
-                <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <i data-lucide="stethoscope" class="h-8 w-8 text-blue-900"></i>
-                </div>
-                <h3 class="text-2xl text-blue-900 font-semibold">PCMSO</h3>
-                <p class="text-sm font-medium text-gray-700">Programa de Controle Médico</p>
-              </div>
-              <div class="card-content space-y-2">
-                <p class="text-gray-600">Exames e acompanhamento para saúde ocupacional dos colaboradores da empresa.</p>
-                <button data-scroll="#contato" class="btn w-full border border-[#0b2452] text-[#0b2452] hover:bg-[#0b2452] hover:text-white bg-white">Saiba Mais</button>
-              </div>
-            </article>
-
-            <article class="card hover:shadow-xl transition-all duration-300 border-0 shadow-md">
-              <div class="card-header">
-                <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <i data-lucide="users" class="h-8 w-8 text-blue-900"></i>
-                </div>
-                <h3 class="text-2xl text-blue-900 font-semibold">Assessoria Trabalhista</h3>
-                <p class="text-sm font-medium text-gray-700">Orientação e soluções em rotinas trabalhistas</p>
-              </div>
-              <div class="card-content space-y-2">
-                <p class="text-gray-600">Consultoria para contratação, folha e obrigações trabalhistas.</p>
                 <button data-scroll="#contato" class="btn w-full border border-[#0b2452] text-[#0b2452] hover:bg-[#0b2452] hover:text-white bg-white">Saiba Mais</button>
               </div>
             </article>

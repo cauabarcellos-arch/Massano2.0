@@ -371,6 +371,26 @@ function setupScrollReveal() {
  * Inicialização
  */
 window.addEventListener('DOMContentLoaded', () => {
+        // Carrossel de imagens hero
+        function setupHeroCarousel() {
+            const imgs = document.querySelectorAll('.hero-carousel .carousel-img');
+            let idx = 0;
+            const total = imgs.length;
+            const interval = 4000; // 4 segundos por imagem
+
+            function showImage(i) {
+                imgs.forEach((img, j) => {
+                    img.style.opacity = (j === i) ? '1' : '0';
+                    img.style.zIndex = (j === i) ? '1' : '0';
+                });
+            }
+            showImage(idx);
+            setInterval(() => {
+                idx = (idx + 1) % total;
+                showImage(idx);
+            }, interval);
+        }
+        setupHeroCarousel();
     // Inicializa ícones Lucide
     if (window.lucide?.createIcons) {
         window.lucide.createIcons();
