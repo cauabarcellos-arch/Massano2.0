@@ -244,7 +244,7 @@ body {
 
 #mobile-menu {
     background: white;
-    border-top: 2px solid var(--accent-gold);
+    border-top: 4px solid var(--accent-gold);
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     padding: 1rem 2rem !important;
 }
@@ -268,10 +268,109 @@ body {
     margin-top: 0;
     min-height: 100vh;
     position: relative;
-    background-image: url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1600');
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
+    animation:colorOverlay  35s infinite;
+}
+
+@keyframes colorOverlay {
+    0%, 15% {
+        background-image: url('imagens/segurança4.jpeg-1024x683-1.jpg');
+        filter: brightness(1);
+    }
+    16% {
+        filter: brightness(1.1);
+        background-image: url('imagens/segurança4.jpeg-1024x683-1.jpg');
+    }
+    17% {
+        filter: brightness(1.1);
+        background-image: url('imagens/fotodeseguranca2.jpg');
+    }
+    18% {
+        filter:brightness(1);
+        background-image: url('imagens/fotodeseguranca2.jpg');
+    }
+    19%, 31% {
+        filter: brightness(1);
+        background-image: url('imagens/fotodeseguranca2.jpg');
+    }
+    32% {
+        filter: brightness(1.1);
+        background-image: url('imagens/fotodeseguranca2.jpg');
+    }
+    33% {
+        filter: brightness(1.1);
+        background-image: url('imagens/fotodeseguranca1.jpg');
+    }
+    34% {
+        filter: brightness(1);
+        background-image: url('imagens/fotodeseguranca1.jpg');
+    }
+    35%, 47% {
+        filter: brightness(1);
+        background-image: url('imagens/fotodeseguranca1.jpg');
+    }
+    48% {
+        filter: brightness(1.1);
+        background-image: url('imagens/fotodeseguranca1.jpg');
+    }
+    49% {
+        filter: brightness(1.1);
+        background-image: url('imagens/segurança3.jpeg-1024x683-1.jpg');
+    }
+    50% {
+        filter: brightness(1);
+        background-image: url('imagens/segurança3.jpeg-1024x683-1.jpg');
+    }
+    51%, 63% {
+        filter: brightness(1);
+        background-image: url('imagens/segurança3.jpeg-1024x683-1.jpg');
+    }
+    64% {
+        filter: brightness(1.1);
+        background-image: url('imagens/segurança3.jpeg-1024x683-1.jpg');
+    }
+    65% {
+        filter: brightness(1.1);
+        background-image: url('imagens/segurança5.jpeg-1024x683-1.jpg');
+    }
+    66% {
+        filter: brightness(1);
+        background-image: url('imagens/segurança5.jpeg-1024x683-1.jpg');
+    }
+    67%, 79% {
+        filter: brightness(1);
+        background-image: url('imagens/segurança5.jpeg-1024x683-1.jpg');
+    }
+    80% {
+        filter: brightness(1.1);
+        background-image: url('imagens/segurança5.jpeg-1024x683-1.jpg');
+    }
+    81% {
+        filter: brightness(1.1);
+        background-image: url('imagens/segurança4.jpeg-1024x683-1.jpg');
+    }
+    82% {
+        filter: brightness(1);
+        background-image: url('imagens/segurança4.jpeg-1024x683-1.jpg');
+    }
+    83%, 95% {
+        filter: brightness(1);
+        background-image: url('imagens/segurança4.jpeg-1024x683-1.jpg');
+    }
+    96% {
+        filter: brightness(1.1);
+        background-image: url('imagens/segurança4.jpeg-1024x683-1.jpg');
+    }
+    97% {
+        filter: brightness(1.1);
+        background-image: url('imagens/fotodeseguranca2.jpg');
+    }
+    98%, 100% {
+        filter: brightness(1);
+        background-image: url('imagens/fotodeseguranca2.jpg');
+    }
 }
 
 .hero-overlay {
