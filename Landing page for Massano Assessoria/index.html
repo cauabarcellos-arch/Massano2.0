@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -17,7 +16,6 @@
           <div class="flex items-center gap-2 lg:gap-3">
             <a href="#home" class="flex items-center gap-2 lg:gap-3">
               <img src="imagens/sem_fudno.png" alt="Logo Massano Assessoria" class="h-24 w-auto md:h-28 lg:h-32 xl:h-36" />
-
             </a>
           </div>
           <div class="flex items-center gap-2 lg:gap-4 w-full justify-center lg:justify-end">
@@ -59,7 +57,12 @@
               garantindo conformidade legal, prevenção de riscos e tranquilidade para sua empresa.<br>
               <span class="block mt-2 text-lg text-[#ffe082]">Atendimento em todo Brasil.</span>
             </p>
-            <button data-scroll="#servicos" class="btn hero-cta text-white px-10 py-7 text-2xl font-bold tracking-wide">Falar com Especialista</button>
+            <div class="flex items-center gap-4">
+              <button data-scroll="#servicos" class="btn hero-cta text-white px-10 py-7 text-2xl font-bold tracking-wide">Falar com Especialista</button>
+              <button onclick="openPricePopup()" class="text-sm underline text-[#ffe082] hover:text-white">
+                Ver detalhes do plano
+              </button>
+            </div>
           </div>
 
           <aside class="request-card hidden lg:block">
@@ -83,6 +86,9 @@
                   </div>
                   <button type="submit" class="btn w-full connect-btn text-white font-semibold">Enviar Solicitação</button>
                 </form>
+                <button onclick="openPricePopup()" class="text-xs text-[#b89355] underline mt-2 w-full text-center">
+                  Ver valores completos
+                </button>
               </div>
             </div>
           </aside>
@@ -342,9 +348,35 @@
       </footer>
     </div>
 
+    <!-- POPUP DE PREÇO -->
+    <div class="price-popup-overlay" id="pricePopup">
+        <div class="price-popup">
+            <button class="close-btn" onclick="closePricePopup()">×</button>
+            <div class="popup-badge">PLANO COMPLETO</div>
+            <h2>Consultoria em Segurança do Trabalho</h2>
+            <div class="price-subtitle">Para pequenas empresas - Tudo incluso</div>
+            
+            <div class="price-value">
+                R$ 300 <span>/mês</span>
+            </div>
+            <div class="price-period">Consultoria mensal com suporte ilimitado</div>
+            
+            <ul class="price-features">
+                <li><i>✓</i> Elaboração de PGR completo</li>
+                <li><i>✓</i> Declaração de Informações de Riscos (DIR)</li>
+                <li><i>✓</i> Suporte via WhatsApp 24/7</li>
+            </ul>
+            
+            <div class="popup-actions">
+                <button class="btn-primary" onclick="closePricePopup(); window.location.href='#contato'">FALAR COM ESPECIALISTA</button>
+                <button class="btn-secondary" onclick="closePricePopup()">AGORA NÃO</button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="script.js"></script>
-  </body>
+    
     <!-- Modal explicativo DIR/PGR -->
     <div id="modal-servico" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,36,114,0.35);z-index:9999;align-items:center;justify-content:center;padding:2rem;box-sizing:border-box;">
       <div style="background:#fff;border-radius:12px;max-width:720px;width:clamp(320px,70vw,720px);max-height:80vh;overflow-y:auto;padding:1.25rem 1.25rem;box-shadow:0 12px 36px rgba(10,36,114,0.18);position:relative;">
@@ -441,5 +473,5 @@ Aqui são identificados:<br>
         requestAnimationFrame(animateCount);
       });
     </script>
+  </body>
 </html>
-  

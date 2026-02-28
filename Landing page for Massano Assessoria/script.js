@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, stepTime);
     }
 });
+
 // Número do WhatsApp
 const WHATSAPP_NUMBER = '71 99111-7575';
 
@@ -42,7 +43,6 @@ function scrollToSection(href) {
 function openWhatsApp() {
     const message = encodeURIComponent('Olá! Gostaria de saber mais sobre os serviços de regularização empresarial.');
     
-    // Feedback visual nos botões
     const buttons = document.querySelectorAll('[data-action="whatsapp"]');
     buttons.forEach(btn => {
         btn.style.transform = 'scale(0.95)';
@@ -106,14 +106,12 @@ function setupScrollButtons() {
 
             scrollToSection(href);
 
-            // Fecha menu mobile se aberto
             if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
                 menuIcon?.classList.remove('hidden');
                 closeIcon?.classList.add('hidden');
             }
 
-            // Animação do botão clicado
             button.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 button.style.transform = '';
@@ -136,7 +134,6 @@ function setupMobileMenu() {
     menuButton.addEventListener('click', () => {
         const isOpen = !mobileMenu.classList.contains('hidden');
         
-        // Animação do botão
         menuButton.style.transform = 'scale(0.9)';
         setTimeout(() => {
             menuButton.style.transform = '';
@@ -147,12 +144,10 @@ function setupMobileMenu() {
         if (isOpen) {
             menuIcon?.classList.remove('hidden');
             closeIcon?.classList.add('hidden');
-            // Animação de fechar
             mobileMenu.style.animation = 'slideOutUp 0.3s ease';
         } else {
             menuIcon?.classList.add('hidden');
             closeIcon?.classList.remove('hidden');
-            // Animação de abrir
             mobileMenu.style.animation = 'slideInDown 0.3s ease';
         }
     });
@@ -181,7 +176,6 @@ function setupMailForms() {
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             
-            // Feedback de loading
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
 
@@ -189,15 +183,12 @@ function setupMailForms() {
             const subject = form.getAttribute('data-mail-subject') || 'Solicitação de Orçamento - Massano Assessoria';
             const body = buildMailBody(formData);
 
-            // Simula um pequeno delay para mostrar o loading
             setTimeout(() => {
                 openMailTo(subject, body);
                 
-                // Remove loading
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
                 
-                // Feedback de sucesso
                 submitBtn.textContent = '✓ Enviado!';
                 submitBtn.style.background = '#10b981';
                 
@@ -291,7 +282,6 @@ function animarFatias(progresso) {
         const largeArcFlag = anguloEfetivo > 180 ? 1 : 0;
         const d = `M ${centroX} ${centroY} L ${x1} ${y1} A ${raioEfetivo} ${raioEfetivo} 0 ${largeArcFlag} 1 ${x2} ${y2} Z`;
         
-        // Animação suave com requestAnimationFrame
         requestAnimationFrame(() => {
             path.setAttribute("d", d);
         });
@@ -314,13 +304,11 @@ function setupBadgeAnimation() {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
         
-        // Easing suave (cubic-bezier)
         const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
         
         const value = Math.floor(eased * (end - start) + start);
         el.textContent = '+' + value;
         
-        // Anima as fatias
         animarFatias(eased);
 
         if (progress < 1) {
@@ -329,7 +317,6 @@ function setupBadgeAnimation() {
             el.textContent = '+10';
             animarFatias(1);
             
-            // Pequena animação de pulso ao final
             const badge = document.querySelector('.xp-badge');
             badge.style.animation = 'pulse 0.5s';
             setTimeout(() => {
@@ -338,7 +325,6 @@ function setupBadgeAnimation() {
         }
     }
 
-    // Delay inicial para dar tempo de carregar
     setTimeout(() => {
         requestAnimationFrame(animateCount);
     }, 500);
@@ -368,35 +354,50 @@ function setupScrollReveal() {
 }
 
 /**
+ * ===== POPUP DE PREÇO =====
+ */
+function openPricePopup() {
+    const popup = document.getElementById('pricePopup');
+    popup.classList.add('active');
+}
+
+function closePricePopup() {
+    const popup = document.getElementById('pricePopup');
+    popup.classList.remove('active');
+}
+
+/**
  * Inicialização
  */
 window.addEventListener('DOMContentLoaded', () => {
-        // Carrossel de imagens hero
-        function setupHeroCarousel() {
-            const imgs = document.querySelectorAll('.hero-carousel .carousel-img');
-            let idx = 0;
-            const total = imgs.length;
-            const interval = 4000; // 4 segundos por imagem
+    function setupHeroCarousel() {
+        const imgs = document.querySelectorAll('.hero-carousel .carousel-img');
+        let idx = 0;
+        const total = imgs.length;
+        const interval = 4000;
 
-            function showImage(i) {
-                imgs.forEach((img, j) => {
-                    img.style.opacity = (j === i) ? '1' : '0';
-                    img.style.zIndex = (j === i) ? '1' : '0';
-                });
-            }
+        function showImage(i) {
+            imgs.forEach((img, j) => {
+                img.style.opacity = (j === i) ? '1' : '0';
+                img.style.zIndex = (j === i) ? '1' : '0';
+            });
+        }
+        
+        if (total > 0) {
             showImage(idx);
             setInterval(() => {
                 idx = (idx + 1) % total;
                 showImage(idx);
             }, interval);
         }
-        setupHeroCarousel();
-    // Inicializa ícones Lucide
+    }
+    
+    setupHeroCarousel();
+    
     if (window.lucide?.createIcons) {
         window.lucide.createIcons();
     }
 
-    // Configura todas as funcionalidades
     criarFatias();
     setupBadgeAnimation();
     setupScrollButtons();
@@ -406,7 +407,6 @@ window.addEventListener('DOMContentLoaded', () => {
     setupCurrentYear();
     setupScrollReveal();
 
-    // Smooth scroll para todos os links internos
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -416,16 +416,78 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Configurar fechar popup ao clicar fora
+    const popup = document.getElementById('pricePopup');
+    if (popup) {
+        popup.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePricePopup();
+            }
+        });
+    }
+
+    // Fechar popup com tecla ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closePricePopup();
+        }
+    });
+
+    // Abrir popup automaticamente após 5 segundos (opcional)
+    setTimeout(function() {
+        if (!sessionStorage.getItem('popupShown')) {
+            openPricePopup();
+            sessionStorage.setItem('popupShown', 'true');
+        }
+    }, 5000);
 });
 
-// Animação de loading para imagens
 window.addEventListener('load', () => {
-    // Remove qualquer classe de loading
     document.body.classList.add('loaded');
     
-    // Adiciona classe para elementos que precisam de animação pós-load
     const heroContent = document.querySelector('.hero-panel .relative');
     if (heroContent) {
         heroContent.classList.add('content-loaded');
+    }
+});
+
+// ===== FECHAR MODAL AO CLICAR FORA =====
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('modal-servico');
+    
+    if (modal) {
+        modal.addEventListener('click', function(event) {
+            // Verifica se clicou no fundo escuro (overlay) e não no conteúdo do modal
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    }
+});
+
+// ===== POPUP INLINE ENTRE O TEXTO =====
+function togglePricePopup() {
+    const popup = document.getElementById('pricePopupInline');
+    popup.classList.toggle('show');
+}
+
+// Fechar popup ao clicar fora
+document.addEventListener('click', function(event) {
+    const popup = document.getElementById('pricePopupInline');
+    const trigger = document.querySelector('.price-popup-trigger');
+    
+    if (popup && trigger) {
+        if (!trigger.contains(event.target) && !popup.contains(event.target)) {
+            popup.classList.remove('show');
+        }
+    }
+});
+
+// Fechar com ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const popup = document.getElementById('pricePopupInline');
+        if (popup) popup.classList.remove('show');
     }
 });
