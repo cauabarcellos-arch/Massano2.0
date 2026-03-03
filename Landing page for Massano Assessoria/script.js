@@ -199,6 +199,77 @@ function setupBadgeAnimation() {
     setTimeout(() => requestAnimationFrame(animateCount), 500);
 }
 
+// ===== ANIMAÇÃO DE CONTADORES (RESULTADOS) =====
+function setupCountUpAnimation() {
+    const els = Array.from(document.querySelectorAll('[data-countup]'));
+    if (!els.length) return;
+
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const animateEl = (el) => {
+        if (!el || el.dataset.countupDone === 'true') return;
+
+        const toRaw = el.getAttribute('data-to');
+        const suffix = el.getAttribute('data-suffix') || '';
+        const prefix = el.getAttribute('data-prefix') || '';
+        const to = Number(toRaw);
+
+        if (!Number.isFinite(to)) {
+            el.dataset.countupDone = 'true';
+            return;
+        }
+
+        if (prefersReducedMotion) {
+            el.textContent = `${prefix}${Math.round(to)}${suffix}`;
+            el.dataset.countupDone = 'true';
+            return;
+        }
+
+        const durationMs = 700;
+        const startTime = performance.now();
+
+        // Começa do zero no momento em que entra na tela
+        el.textContent = `${prefix}0${suffix}`;
+
+        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+        const step = (now) => {
+            const t = Math.min((now - startTime) / durationMs, 1);
+            const eased = easeOutCubic(t);
+            const current = Math.round(eased * to);
+            el.textContent = `${prefix}${current}${suffix}`;
+
+            if (t < 1) {
+                requestAnimationFrame(step);
+            } else {
+                el.textContent = `${prefix}${Math.round(to)}${suffix}`;
+                el.dataset.countupDone = 'true';
+            }
+        };
+
+        requestAnimationFrame(step);
+    };
+
+    if (!('IntersectionObserver' in window)) {
+        els.forEach(animateEl);
+        return;
+    }
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    animateEl(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.25 }
+    );
+
+    els.forEach((el) => observer.observe(el));
+}
+
 // ===== SETUP DOS BOTÕES =====
 function setupScrollButtons() {
     document.querySelectorAll('[data-scroll]').forEach(button => {
@@ -535,6 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMobileMenu();
     setupWhatsAppButtons();
     setupHeroSlider();
+    setupCountUpAnimation();
     setupFormspreeRedirect();
     setupFormspreeAjax();
     setupMailForms();
